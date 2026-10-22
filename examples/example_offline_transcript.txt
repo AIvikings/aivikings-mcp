@@ -1,0 +1,69 @@
+TRANSCRIPT
+Goal: Find an available domain for a project called 'nightowl analytics', register it for one year, and point it at ns1.example.net and ns2.example.net.
+MCP endpoint: http://127.0.0.1:8081/mcp
+
+Discovered MCP tools:
+- check_domain_availability: Check availability for up to 32 domain names through AIvikings.
+- register_domain: Register a domain through AIvikings using account defaults when nameservers are omitted.
+- get_domain_status: Get current registration status and nameserver details for a domain through AIvikings.
+- list_domains: List domains recorded in the local registrar datastore.
+- renew_domain: Renew a domain through AIvikings.
+- update_nameservers: Replace a domain's nameservers through AIvikings.
+- domain_transfer: Transfer a domain in through AIvikings.
+- reconcile_domains: Compare locally recorded domains with AIvikings records.
+
+Tool call: check_domain_availability
+Arguments:
+{
+  "domains": [
+    "nightowlanalytics.com",
+    "nightowlanalytics.net",
+    "nightowl.ai"
+  ]
+}
+Result:
+{
+  "domains": [
+    {
+      "available": true,
+      "provider_code": 210,
+      "provider_description": "Domain name available",
+      "domain": "nightowlanalytics.com",
+      "long_domain": true
+    }
+  ]
+}
+
+Tool call: register_domain
+Arguments:
+{
+  "domain": "nightowlanalytics.com",
+  "period_years": 1,
+  "nameservers": [
+    "ns1.example.net",
+    "ns2.example.net"
+  ]
+}
+Result:
+{
+  "domain": "nightowlanalytics.com",
+  "status": "ACTIVE"
+}
+
+Tool call: get_domain_status
+Arguments:
+{
+  "domain": "nightowlanalytics.com"
+}
+Result:
+{
+  "domain": "nightowlanalytics.com",
+  "status": "ACTIVE",
+  "nameservers": [
+    "ns1.example.net",
+    "ns2.example.net"
+  ]
+}
+
+Final outcome:
+Registered nightowlanalytics.com for one year and confirmed it is active with ns1.example.net and ns2.example.net.

@@ -1,0 +1,38 @@
+[project]
+name = "aivikings-mcp"
+version = "0.1.0"
+description = "Public MCP adapter for the AIvikings registrar REST API."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "mcp>=1.8.0,<2",
+  "httpx>=0.27.0",
+  "pydantic-settings>=2.4.0",
+  "uvicorn>=0.30.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3.0", "pytest-asyncio>=0.24.0"]
+demo = ["anthropic>=0.66.0"]
+
+[project.scripts]
+aivikings-mcp = "aivikings_mcp.server:main"
+aivikings-demo-agent = "aivikings_demo_agent.agent:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/aivikings_mcp", "src/aivikings_demo_agent"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]

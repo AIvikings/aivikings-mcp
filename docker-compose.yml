@@ -1,0 +1,16 @@
+services:
+  mcp:
+    build: .
+    ports:
+      - "${MCP_PORT:-8081}:8081"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      AIVIKINGS_API_BASE_URL: ${AIVIKINGS_API_BASE_URL:-http://host.docker.internal:8080}
+      AIVIKINGS_PUBLIC_API_BASE_URL: ${AIVIKINGS_PUBLIC_API_BASE_URL:-http://localhost:8080}
+      AIVIKINGS_MCP_URL: ${AIVIKINGS_MCP_URL:-http://localhost:8081/mcp}
+      AIVIKINGS_MCP_HOST: 0.0.0.0
+      AIVIKINGS_MCP_PORT: 8081
+      AIVIKINGS_MCP_PATH: ${AIVIKINGS_MCP_PATH:-/mcp}
+      AIVIKINGS_MCP_REQUEST_TIMEOUT_SECONDS: ${AIVIKINGS_MCP_REQUEST_TIMEOUT_SECONDS:-120}
+    restart: unless-stopped
