@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ai.aivikings/registrar",
+  "title": "AiVikings.ai",
+  "description": "Find, register, and manage domains from any AI chat or agent",
+  "version": "1.0.3",
+  "websiteUrl": "https://aivikings.ai",
+  "repository": {
+    "url": "https://github.com/AIvikings/aivikings-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.aivikings.ai/mcp"
+    }
+  ]
+}
