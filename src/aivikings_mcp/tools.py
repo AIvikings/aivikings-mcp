@@ -7,8 +7,12 @@ from .client import BackendClient
 
 
 def register_tools(mcp: FastMCP, api: BackendClient) -> None:
-    read_only_open_world = ToolAnnotations(readOnlyHint=True, openWorldHint=True)
-    read_only_closed_world = ToolAnnotations(readOnlyHint=True, openWorldHint=False)
+    read_only_open_world = ToolAnnotations(
+        readOnlyHint=True, destructiveHint=False, openWorldHint=True
+    )
+    read_only_closed_world = ToolAnnotations(
+        readOnlyHint=True, destructiveHint=False, openWorldHint=False
+    )
     additive_external_write = ToolAnnotations(
         readOnlyHint=False,
         destructiveHint=False,

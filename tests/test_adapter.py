@@ -26,6 +26,12 @@ def context(token="customer-token"):
 async def test_tool_schemas_and_annotations_are_preserved():
     tools = {tool.name: tool for tool in await build_mcp_server().list_tools()}
     assert len(tools) == 34
+    for tool in tools.values():
+        annotations = tool.model_dump(mode="json", exclude_none=True)["annotations"]
+        for hint in ("readOnlyHint", "openWorldHint", "destructiveHint"):
+            assert type(annotations[hint]) is bool, (tool.name, hint)
+        if annotations["readOnlyHint"]:
+            assert annotations["destructiveHint"] is False, tool.name
     for name in ("check_domain_availability", "check_single_domain_availability"):
         tool = tools[name]
         assert tool.inputSchema["properties"]["depth"]["default"] == "confirm"
